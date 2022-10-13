@@ -196,7 +196,7 @@ class _MyAppState extends State<MyApp> {
                         verticalSpacing: 0,
                         horizontalSpacing: 0,
                         gridPadding: EdgeInsets.zero,
-                        initCategory: Category.RECENT,
+                        initCategory: Category.recent,
                         bgColor: const Color(0xFFF2F2F2),
                         indicatorColor: Colors.blue,
                         iconColor: Colors.grey,
@@ -217,7 +217,7 @@ class _MyAppState extends State<MyApp> {
                             const Center(child: CircularProgressIndicator()),
                         tabIndicatorAnimDuration: kTabScrollDuration,
                         categoryIcons: const CategoryIcons(),
-                        buttonMode: ButtonMode.MATERIAL,
+                        buttonMode: ButtonMode.material,
                         checkPlatformCompatibility: false,
                         emojiTextStyle:
                             GoogleFonts.notoEmoji(color: Colors.black),

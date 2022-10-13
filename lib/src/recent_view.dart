@@ -3,21 +3,19 @@ import 'package:emoji_picker_flutter/src/skin_tone_overlay.dart';
 import 'package:flutter/material.dart';
 
 /// Default EmojiPicker Implementation
-class DefaultEmojiPickerView extends EmojiPickerBuilder {
+class RecentView extends EmojiPickerBuilder {
   /// Constructor
-  const DefaultEmojiPickerView(Config config, EmojiViewState state, {super.key})
+  const RecentView(Config config, EmojiViewState state, {super.key})
       : super(config, state);
 
   @override
   DefaultEmojiPickerViewState createState() => DefaultEmojiPickerViewState();
 }
 
-class DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
+class DefaultEmojiPickerViewState extends State<RecentView>
     with SingleTickerProviderStateMixin, SkinToneOverlayStateMixin {
   final double _tabBarHeight = 46;
 
-  late PageController _pageController;
-  late TabController _tabController;
   late final _scrollController = ScrollController();
 
   late final _utils = EmojiPickerUtils();
@@ -29,12 +27,6 @@ class DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
     if (initCategory == -1) {
       initCategory = 0;
     }
-    _tabController = TabController(
-        initialIndex: initCategory,
-        length: widget.state.categoryEmoji.length,
-        vsync: this);
-    _pageController = PageController(initialPage: initCategory)
-      ..addListener(closeSkinToneOverlay);
     _scrollController.addListener(closeSkinToneOverlay);
     super.initState();
   }
@@ -42,8 +34,6 @@ class DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
   @override
   void dispose() {
     closeSkinToneOverlay();
-    _pageController.dispose();
-    _tabController.dispose();
     _scrollController.dispose();
     super.dispose();
   }
@@ -56,81 +46,9 @@ class DefaultEmojiPickerViewState extends State<DefaultEmojiPickerView>
         return EmojiContainer(
           color: widget.config.bgColor,
           buttonMode: widget.config.buttonMode,
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  Expanded(
-                    child: _buildTabBar(context),
-                  ),
-                  _buildBackspaceButton(),
-                ],
-              ),
-              Flexible(
-                child: PageView.builder(
-                  itemCount: widget.state.categoryEmoji.length,
-                  controller: _pageController,
-                  onPageChanged: (index) {
-                    _tabController.animateTo(
-                      index,
-                      duration: widget.config.tabIndicatorAnimDuration,
-                    );
-                  },
-                  itemBuilder: (context, index) =>
-                      _buildPage(emojiSize, widget.state.categoryEmoji[index]),
-                ),
-              ),
-            ],
-          ),
+          child: _buildPage(emojiSize, widget.state.categoryEmoji[0]),
         );
       },
-    );
-  }
-
-  Widget _buildTabBar(BuildContext context) => SizedBox(
-        height: _tabBarHeight,
-        child: TabBar(
-          labelColor: widget.config.iconColorSelected,
-          indicatorColor: widget.config.indicatorColor,
-          unselectedLabelColor: widget.config.iconColor,
-          controller: _tabController,
-          labelPadding: EdgeInsets.zero,
-          onTap: (index) {
-            closeSkinToneOverlay();
-            _pageController.jumpToPage(index);
-          },
-          tabs: widget.state.categoryEmoji
-              .asMap()
-              .entries
-              .map<Widget>(
-                  (item) => _buildCategory(item.key, item.value.category))
-              .toList(),
-        ),
-      );
-
-  Widget _buildBackspaceButton() {
-    if (widget.state.onBackspacePressed != null) {
-      return Material(
-        type: MaterialType.transparency,
-        child: IconButton(
-            padding: const EdgeInsets.only(bottom: 2),
-            icon: Icon(
-              Icons.backspace,
-              color: widget.config.backspaceColor,
-            ),
-            onPressed: () {
-              widget.state.onBackspacePressed!();
-            }),
-      );
-    }
-    return const SizedBox.shrink();
-  }
-
-  Widget _buildCategory(int index, Category category) {
-    return Tab(
-      icon: Icon(
-        widget.config.getIconForCategory(category),
-      ),
     );
   }
 

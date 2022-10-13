@@ -6,7 +6,7 @@ import 'package:emoji_picker_flutter/src/emoji_picker.dart';
 import 'package:flutter/material.dart';
 
 /// Default Widget if no recent is available
-const DefaultNoRecentsWidget = Text(
+const defaultNoRecentWidget = Text(
   'No Recents',
   style: TextStyle(fontSize: 20, color: Colors.black26),
   textAlign: TextAlign.center,
@@ -21,7 +21,7 @@ class Config {
     this.verticalSpacing = 0,
     this.horizontalSpacing = 0,
     this.gridPadding = EdgeInsets.zero,
-    this.initCategory = Category.RECENT,
+    this.initCategory = Category.recent,
     this.bgColor = const Color(0xFFEBEFF2),
     this.indicatorColor = Colors.blue,
     this.iconColor = Colors.grey,
@@ -33,11 +33,11 @@ class Config {
     this.showRecentsTab = true,
     this.recentsLimit = 28,
     this.replaceEmojiOnLimitExceed = false,
-    this.noRecents = DefaultNoRecentsWidget,
+    this.noRecents = defaultNoRecentWidget,
     this.loadingIndicator = const SizedBox.shrink(),
     this.tabIndicatorAnimDuration = kTabScrollDuration,
     this.categoryIcons = const CategoryIcons(),
-    this.buttonMode = ButtonMode.MATERIAL,
+    this.buttonMode = ButtonMode.material,
     this.checkPlatformCompatibility = true,
     this.emojiSet,
     this.emojiTextStyle,
@@ -134,23 +134,23 @@ class Config {
   /// Returns the icon for the category
   IconData getIconForCategory(Category category) {
     switch (category) {
-      case Category.RECENT:
+      case Category.recent:
         return categoryIcons.recentIcon;
-      case Category.SMILEYS:
+      case Category.smileys:
         return categoryIcons.smileyIcon;
-      case Category.ANIMALS:
+      case Category.animals:
         return categoryIcons.animalIcon;
-      case Category.FOODS:
+      case Category.foods:
         return categoryIcons.foodIcon;
-      case Category.TRAVEL:
+      case Category.travel:
         return categoryIcons.travelIcon;
-      case Category.ACTIVITIES:
+      case Category.activities:
         return categoryIcons.activityIcon;
-      case Category.OBJECTS:
+      case Category.objects:
         return categoryIcons.objectIcon;
-      case Category.SYMBOLS:
+      case Category.symbols:
         return categoryIcons.symbolIcon;
-      case Category.FLAGS:
+      case Category.flags:
         return categoryIcons.flagIcon;
       default:
         throw Exception('Unsupported Category');

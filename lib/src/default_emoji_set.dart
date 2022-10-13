@@ -5,7 +5,7 @@ import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 /// List of categories of emojis
 const List<CategoryEmoji> defaultEmojiSet = [
 // ======================================================= Category.SMILEYS
-  CategoryEmoji(Category.SMILEYS, [
+  CategoryEmoji(Category.smileys, [
     Emoji('😀', 'Grinning Face'),
     Emoji('😃', 'Grinning Face With Big Eyes'),
     Emoji('😄', 'Grinning Face With Smiling Eyes'),
@@ -369,7 +369,7 @@ const List<CategoryEmoji> defaultEmojiSet = [
   ]),
 
 // ======================================================= Category.ANIMALS
-  CategoryEmoji(Category.ANIMALS, [
+  CategoryEmoji(Category.animals, [
     Emoji('🐶', 'Dog Face'),
     Emoji('🐱', 'Cat Face'),
     Emoji('🐭', 'Mouse Face'),
@@ -554,7 +554,7 @@ const List<CategoryEmoji> defaultEmojiSet = [
   ]),
 
 // ======================================================= Category.FOODS
-  CategoryEmoji(Category.FOODS, [
+  CategoryEmoji(Category.foods, [
     Emoji('🍇', 'Grapes'),
     Emoji('🍈', 'Melon'),
     Emoji('🍉', 'Watermelon'),
@@ -664,7 +664,7 @@ const List<CategoryEmoji> defaultEmojiSet = [
   ]),
 
 // ======================================================= Category.TRAVEL
-  CategoryEmoji(Category.TRAVEL, [
+  CategoryEmoji(Category.travel, [
     Emoji('🗾', 'Map of Japan'),
     Emoji('🏔', 'Snow-Capped Mountain'),
     Emoji('⛰', 'Mountain'),
@@ -792,7 +792,7 @@ const List<CategoryEmoji> defaultEmojiSet = [
   ]),
 
 // ======================================================= Category.ACTIVITIES
-  CategoryEmoji(Category.ACTIVITIES, [
+  CategoryEmoji(Category.activities, [
     Emoji('🧗‍♂️', 'Man Climbing', hasSkinTone: true),
     Emoji('🧗‍♀️', 'Woman Climbing', hasSkinTone: true),
     Emoji('🏇', 'Horse Racing', hasSkinTone: true),
@@ -887,7 +887,7 @@ const List<CategoryEmoji> defaultEmojiSet = [
   ]),
 
 // ======================================================= Category.OBJECTS
-  CategoryEmoji(Category.OBJECTS, [
+  CategoryEmoji(Category.objects, [
     Emoji('💌', 'Love Letter'),
     Emoji('🕳', 'Hole'),
     Emoji('💣', 'Bomb'),
@@ -1089,7 +1089,7 @@ const List<CategoryEmoji> defaultEmojiSet = [
   ]),
 
 // ======================================================= Category.SYMBOLS
-  CategoryEmoji(Category.SYMBOLS, [
+  CategoryEmoji(Category.symbols, [
     Emoji('💘', 'Heart With Arrow'),
     Emoji('💝', 'Heart With Ribbon'),
     Emoji('💖', 'Sparkling Heart'),
@@ -1352,7 +1352,7 @@ const List<CategoryEmoji> defaultEmojiSet = [
   ]),
 
 // ======================================================= Category.FLAGS
-  CategoryEmoji(Category.FLAGS, [
+  CategoryEmoji(Category.flags, [
     Emoji('🏁', 'Chequered Flag'),
     Emoji('🚩', 'Triangular Flag'),
     Emoji('🎌', 'Crossed Flags'),

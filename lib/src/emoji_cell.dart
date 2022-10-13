@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 class EmojiCell extends StatelessWidget {
   /// Constructor for manually setting all properties
   const EmojiCell({
+    super.key,
     required this.emoji,
     required this.emojiSize,
     this.categoryEmoji,
@@ -24,7 +25,8 @@ class EmojiCell extends StatelessWidget {
   /// Constructor that can retrieve as much information as possible from
   /// [Config]
   EmojiCell.fromConfig(
-      {required this.emoji,
+      {super.key,
+      required this.emoji,
       required this.emojiSize,
       this.categoryEmoji,
       this.index = 0,
@@ -75,14 +77,14 @@ class EmojiCell extends StatelessWidget {
     VoidCallback? onLongPressed,
     required Widget child,
   }) {
-    if (buttonMode == ButtonMode.MATERIAL) {
+    if (buttonMode == ButtonMode.material) {
       return InkWell(
         onTap: onPressed,
         onLongPress: onLongPressed,
         child: child,
       );
     }
-    if (buttonMode == ButtonMode.CUPERTINO) {
+    if (buttonMode == ButtonMode.cupertino) {
       return GestureDetector(
         onLongPress: onLongPressed,
         child: CupertinoButton(
@@ -105,11 +107,27 @@ class EmojiCell extends StatelessWidget {
       fontSize: emojiSize,
       backgroundColor: Colors.transparent,
     );
-    final emojiText = Text(
-      emoji.emoji,
-      textScaleFactor: 1.0,
-      style: textStyle == null ? style : textStyle!.merge(style),
-    );
+    late final Widget emojiText;
+    switch (emoji.type) {
+      case EmojiType.emoji:
+        emojiText = Text(
+          emoji.displayText,
+          textScaleFactor: 1.0,
+          style: textStyle == null ? style : textStyle!.merge(style),
+        );
+        break;
+      case EmojiType.icon:
+        emojiText = Icon(emoji.emoji as IconData, size: emojiSize);
+        break;
+      case EmojiType.image:
+        // TODO: Handle this case.
+        emojiText = Text(
+          emoji.displayText,
+          textScaleFactor: 1.0,
+          style: textStyle == null ? style : textStyle!.merge(style),
+        );
+        break;
+    }
 
     return Center(
       child: emoji.hasSkinTone &&
@@ -126,13 +144,13 @@ class EmojiCell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final onPressed = () {
+    onPressed() {
       onEmojiSelected(categoryEmoji?.category, emoji);
-    };
+    }
 
-    final onLongPressed = () {
+    onLongPressed() {
       onSkinToneDialogRequested?.call(emoji, emojiSize, categoryEmoji, index);
-    };
+    }
 
     return _buildButtonWidget(
       onPressed: onPressed,

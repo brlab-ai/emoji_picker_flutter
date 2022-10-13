@@ -20,30 +20,30 @@ class CategoryIcons {
     this.flagIcon = Icons.flag,
   });
 
-  /// Icon for [Category.RECENT]
+  /// Icon for [Category.recent]
   final IconData recentIcon;
 
-  /// Icon for [Category.SMILEYS]
+  /// Icon for [Category.smileys]
   final IconData smileyIcon;
 
-  /// Icon for [Category.ANIMALS]
+  /// Icon for [Category.animals]
   final IconData animalIcon;
 
-  /// Icon for [Category.FOODS]
+  /// Icon for [Category.foods]
   final IconData foodIcon;
 
-  /// Icon for [Category.ACTIVITIES]
+  /// Icon for [Category.activities]
   final IconData activityIcon;
 
-  /// Icon for [Category.TRAVEL]
+  /// Icon for [Category.travel]
   final IconData travelIcon;
 
-  /// Icon for [Category.OBJECTS]
+  /// Icon for [Category.objects]
   final IconData objectIcon;
 
-  /// Icon for [Category.SYMBOLS]
+  /// Icon for [Category.symbols]
   final IconData symbolIcon;
 
-  /// Icon for [Category.FLAGS]
+  /// Icon for [Category.flags]
   final IconData flagIcon;
 }

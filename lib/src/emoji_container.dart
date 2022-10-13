@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 class EmojiContainer extends StatelessWidget {
   /// Constructor
   const EmojiContainer({
+    super.key,
     required this.color,
     required this.buttonMode,
     this.padding,
@@ -29,7 +30,7 @@ class EmojiContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (buttonMode == ButtonMode.MATERIAL) {
+    if (buttonMode == ButtonMode.material) {
       return Material(
         color: color,
         child: padding == null

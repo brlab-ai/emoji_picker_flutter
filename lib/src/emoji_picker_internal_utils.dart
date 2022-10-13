@@ -5,6 +5,7 @@ import 'dart:math';
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 import 'recent_emoji.dart';
 
 /// Helper class that provides internal usage
@@ -82,7 +83,7 @@ class EmojiPickerInternalUtils {
   /// Remove skin tone from given emoji
   Emoji removeSkinTone(Emoji emoji) {
     return emoji.copyWith(
-      emoji: emoji.emoji.replaceFirst(
+      emoji: emoji.displayText.replaceFirst(
         RegExp('${SkinTone.values.join('|')}'),
         '',
       ),

@@ -13,3 +13,5 @@ export 'package:emoji_picker_flutter/src/emoji_picker_utils.dart';
 export 'package:emoji_picker_flutter/src/emoji_skin_tones.dart';
 export 'package:emoji_picker_flutter/src/emoji_text_editing_controller.dart';
 export 'package:emoji_picker_flutter/src/emoji_view_state.dart';
+export 'package:emoji_picker_flutter/src/recent.dart';
+export 'package:emoji_picker_flutter/src/recent_view.dart';

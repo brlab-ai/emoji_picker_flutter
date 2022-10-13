@@ -13,31 +13,31 @@ import 'package:flutter/material.dart';
 /// All [Category] are shown in the category bar
 enum Category {
   /// Recent emojis
-  RECENT,
+  recent,
 
   /// Smiley emojis
-  SMILEYS,
+  smileys,
 
   /// Animal emojis
-  ANIMALS,
+  animals,
 
   /// Food emojis
-  FOODS,
+  foods,
 
   /// Activity emojis
-  ACTIVITIES,
+  activities,
 
   /// Travel emojis
-  TRAVEL,
+  travel,
 
   /// Ojects emojis
-  OBJECTS,
+  objects,
 
   /// Sumbol emojis
-  SYMBOLS,
+  symbols,
 
   /// Flag emojis
-  FLAGS,
+  flags,
 }
 
 /// Extension on Category enum to get its name
@@ -45,23 +45,23 @@ extension CategoryExtension on Category {
   /// Returns name of Category
   String get name {
     switch (this) {
-      case Category.RECENT:
+      case Category.recent:
         return 'recent';
-      case Category.SMILEYS:
+      case Category.smileys:
         return 'smileys';
-      case Category.ANIMALS:
+      case Category.animals:
         return 'animals';
-      case Category.FOODS:
+      case Category.foods:
         return 'foods';
-      case Category.ACTIVITIES:
+      case Category.activities:
         return 'activities';
-      case Category.TRAVEL:
+      case Category.travel:
         return 'travel';
-      case Category.OBJECTS:
+      case Category.objects:
         return 'objects';
-      case Category.SYMBOLS:
+      case Category.symbols:
         return 'symbols';
-      case Category.FLAGS:
+      case Category.flags:
         return 'flags';
     }
   }
@@ -71,13 +71,13 @@ extension CategoryExtension on Category {
 enum ButtonMode {
   /// No cell touch effects, uses GestureDetector only. Provides best grid
   /// scrolling performance
-  NONE,
+  none,
 
   /// Android button style - gives the button a splash color with ripple effect
-  MATERIAL,
+  material,
 
   /// iOS button style - gives the button a fade out effect when pressed
-  CUPERTINO
+  cupertino
 }
 
 /// Number of skin tone icons
@@ -88,14 +88,14 @@ const kSkinToneCount = 6;
 /// The function returns the selected [Emoji] as well
 /// as the [Category] from which it originated
 /// Category can be null in some cases, for example in search results
-typedef void OnEmojiSelected(Category? category, Emoji emoji);
+typedef OnEmojiSelected = void Function(Category? category, Emoji emoji);
 
 /// Callback from emoji cell to show a skin tone selection overlay
-typedef void OnSkinToneDialogRequested(
+typedef OnSkinToneDialogRequested = void Function(
     Emoji emoji, double emojiSize, CategoryEmoji? categoryEmoji, int index);
 
 /// Callback function for backspace button
-typedef void OnBackspacePressed();
+typedef OnBackspacePressed = void Function();
 
 /// Callback function for custom view
 typedef EmojiViewBuilder = Widget Function(Config config, EmojiViewState state);
@@ -223,8 +223,11 @@ class EmojiPickerState extends State<EmojiPicker> {
                   // the RECENT tab, it will make emojis jump since sorting
                   // is based on the use frequency
                   updateRecentEmoji(newRecentEmoji,
-                      refresh: category != Category.RECENT),
+                      refresh: category != Category.recent),
                 });
+      } else {
+        _emojiPickerInternalUtils.addEmojiToRecentlyUsed(
+            emoji: emoji, config: widget.config);
       }
 
       if (widget.textEditingController != null) {
@@ -235,14 +238,14 @@ class EmojiPickerState extends State<EmojiPicker> {
         final cursorPosition = controller.selection.base.offset;
 
         if (cursorPosition < 0) {
-          controller.text += emoji.emoji;
+          controller.text += emoji.displayText;
           widget.onEmojiSelected?.call(category, emoji);
           return;
         }
 
-        final newText =
-            text.replaceRange(selection.start, selection.end, emoji.emoji);
-        final emojiLength = emoji.emoji.length;
+        final newText = text.replaceRange(
+            selection.start, selection.end, emoji.displayText);
+        final emojiLength = emoji.length;
         controller
           ..text = newText
           ..selection = selection.copyWith(
@@ -261,7 +264,7 @@ class EmojiPickerState extends State<EmojiPicker> {
     if (widget.config.showRecentsTab) {
       _recentEmoji = await _emojiPickerInternalUtils.getRecentEmojis();
       final recentEmojiMap = _recentEmoji.map((e) => e.emoji).toList();
-      _categoryEmoji.add(CategoryEmoji(Category.RECENT, recentEmojiMap));
+      _categoryEmoji.add(CategoryEmoji(Category.recent, recentEmojiMap));
     }
     final data = widget.config.emojiSet ?? defaultEmojiSet;
     _categoryEmoji.addAll(widget.config.checkPlatformCompatibility

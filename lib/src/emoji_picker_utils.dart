@@ -88,7 +88,7 @@ class EmojiPickerUtils {
 
   /// Applies skin tone to given emoji
   Emoji applySkinTone(Emoji emoji, String color) {
-    final codeUnits = emoji.emoji.codeUnits;
+    final codeUnits = emoji.codeUnits;
     var result = List<int>.empty(growable: true)
       ..addAll(codeUnits.sublist(0, min(codeUnits.length, 2)))
       ..addAll(color.codeUnits);

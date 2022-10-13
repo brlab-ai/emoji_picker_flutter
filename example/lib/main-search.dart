@@ -20,7 +20,7 @@ class _MyAppState extends State<MyApp> {
   List<Emoji> _searchResults = List.empty();
   OverlayEntry? _overlay;
   final Config _config = const Config(
-    buttonMode: ButtonMode.MATERIAL,
+    buttonMode: ButtonMode.material,
   );
   bool _isSearchFocused = false;
   bool _emojiShowing = false;
@@ -46,7 +46,7 @@ class _MyAppState extends State<MyApp> {
     }
     final newText =
         text.replaceRange(selection.start, selection.end, emoji.emoji);
-    final emojiLength = emoji.emoji.length;
+    final emojiLength = emoji.length;
     _controller
       ..text = newText
       ..selection = selection.copyWith(
