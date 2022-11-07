@@ -35,6 +35,10 @@ class Emoji<T> {
   final EmojiType type;
 
   String get displayText {
+
+    if (emoji is IconData) {
+      return '';
+    }
     switch (type) {
       case EmojiType.emoji:
         return emoji as String;
@@ -116,4 +120,15 @@ class Emoji<T> {
       hasSkinTone: hasSkinTone ?? this.hasSkinTone,
     );
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+          other is Emoji && runtimeType == other.runtimeType &&
+              emoji == other.emoji && type == other.type;
+
+  @override
+  int get hashCode => emoji.hashCode ^ type.hashCode;
+
+
 }
